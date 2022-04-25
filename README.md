@@ -5,8 +5,7 @@ This repository contains files for statechart workshop (27.4.2022).
 # Presentation
 
 The presentation was done with sli.dev and the source is located in `presentation`-directory. 
-
-The exported PDF can be found here: 
+[Check the presentation as PDF here](https://github.com/KnowitJSTSGuild/ui-modeling-with-statecharts/blob/main/presentation/slides-export.pdf)
 
 # Workshop
 Your task in this workshop is to implement application logic for a Wordle-game. The workshop template with UI-components and some
