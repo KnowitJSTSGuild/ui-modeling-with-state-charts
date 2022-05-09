@@ -4,9 +4,6 @@ import wordDB from "./wordle-nyt-answers-alphabetical.txt?raw";
 
 export const wordsArr = wordDB.trim().split("\n");
 
-// First use this function for initializing the target word.
-// If you finish the workshop early, try changing your implementation to use 
-// the async version below.
 export const pickRandomWord = () => wordsArr[_.random(0, wordsArr.length - 1)];
 
 // Imagine this is calling an API to get a random word from server :)
