@@ -1,0 +1,40 @@
+html {
+    --knowit-sand: #e4e1db;
+    --knowit-black: #333333;
+    --knowit-forest: #4b6455;
+    font-family: sans-serif;
+  }
+  
+  #slide-content {
+    background-color: var(--knowit-sand);
+    color: var(--knowit-black);
+  }
+  
+  #slide-content h1 {
+    color: var(--knowit-forest);
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    margin-bottom: 15px;
+  }
+
+  .slidev-layout {
+    padding: 2rem 3rem;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 50px;
+    margin-bottom: 40px;
+  }
+
+  .highlight {
+    display: block;
+    position: absolute;
+    border: 4px solid red;
+    color: red;
+  }

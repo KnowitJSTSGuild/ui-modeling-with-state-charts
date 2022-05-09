@@ -1,52 +1,41 @@
 ---
-# try also 'default' to start simple
-theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+theme: default
+background: https://source.unsplash.com/jW8hkB_Qmj8/1920x1080
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
 lineNumbers: false
-# some information about the slides, markdown enabled
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+aspectRatio: '16/9'
 # persist drawings in exports and build
 drawings:
   persist: false
 ---
 
+<style>
 
-# UI modeling with statecharts
+  #slide-content h1 {
+    font-size: 3rem;
+    color: var(--knowit-sand);
+  }
 
+  p {
+    font-size: 1.8rem;
+    opacity: 0.75;
+  }
+
+</style>
+
+# UI Modeling with Statecharts
 How to make sense of complex UI logic?
 
 ---
 
-# Motivation (1/2) - Facetime bug (January 2019)
-
-1. Start a FaceTime video call
-
-2. Before the call is answered, tap “Add Person” and add yourself
-
-3. You can listen to the callee's microphone <u>before</u> they accept the call
-
-The app was in a state that <u>should be impossible</u>.
-
-
-https://medium.com/@DavidKPiano/the-facetime-bug-and-the-dangers-of-implicit-state-machines-a5f0f61bdaa2
-
----
-
-# Motivation (2/2) - Dangers of implicit state machines
-State machines are already hiding in your code :-)
+# Often UI logic is spread all over component code and difficult to maintain.
 
 ```js
+//...
 const [loading, setLoading] = useState(false);
 const [uploadError, setUploadError] = useState(false);
 
@@ -65,69 +54,111 @@ const onDrop = async files => {
     }, 2000);
   }
 };
+//...
 ```
 
 ---
 
-# State machines (1/2)
+<h1 class="text-center">We can do better...</h1>
 
-<div class="float-right w-100 text-center">
+<img src="/6f559y.jpg" class="mx-auto h-90" />
+
+---
+
+# State machine is an abstract machine that can be in <u>exactly one state at a time</u>
+
+<div class="float-right w-100 mr-20 text-center">
   <img src="/Turnstile_state_machine_colored.png" class=" w-100" />
   A state machine diagram for a turnstile
 </div>
-  
-- A finite number of states
+<br>
 
-- A finite number of events
+- States
+- Events
+- Transitions
 
-- An initial state
+<footer>
 
-- A transition function that determines the next state given the current state and event
+  <small>https://en.wikipedia.org/wiki/Finite-state_machine#/media/File:Turnstile_state_machine_colored.svg</small>
 
-- A (possibly empty) set of final states
+</footer>
 
-<br><br>
-<br><br>
-<br><br>
+<style>
 
-  
+  #slide-content h1 {
+    margin-bottom: 30px
+  }
 
-<small>https://en.wikipedia.org/wiki/Finite-state_machine#/media/File:Turnstile_state_machine_colored.svg</small>
-
-  
+</style>
 
 ---
 
-# State machines (2/2) - Problem: state explosion
-
+# State machines don't scale well. (state explosion)
 
 <img src="/valid-invalid-enabled-disabled-changed-unchanged.png" class="h-90" />
 
-<small>https://statecharts.dev/valid-invalid-enabled-disabled-changed-unchanged.svg</small>
+<footer>
 
+  <small>https://statecharts.dev/valid-invalid-enabled-disabled-changed-unchanged.svg</small>
+
+</footer>
 --- 
 
-# Statecharts
-"A visual formalism for complex systems"
 
-<img src="/valid-invalid-enabled-disabled-changed-unchanged-parallel.png" class="float-right w-80 mr-0" />
 
-Extended state machines. Some of the extensions include:
+# Statecharts solve the state explosion problem with parallel and nested states
 
-- Guarded transitions
-- Actions (entry, exit, transition)
-- Extended state (context)
-- Orthogonal (parallel) states
-- Hierarchical (nested) states
-- History
+<img src="/valid-invalid-enabled-disabled-changed-unchanged-parallel-hierarchy.png" class="w-100" />
 
-<small>https://www.sciencedirect.com/science/article/pii/0167642387900359/pdf</small>
+<footer>
 
-<small>https://statecharts.dev/valid-invalid-enabled-disabled-changed-unchanged-parallel.svg</small>
+<small>https://statecharts.dev/valid-invalid-enabled-disabled-changed-unchanged-parallel-hierarchy.svg</small>
+
+</footer>
 
 ---
 
-# XState (1/4) - Executable statecharts
+# Statecharts are extended state machines
+
+<img src="/glass-statechart.png" class="w-180">
+
+<footer>
+
+https://stately.ai/viz/790f79f2-abcd-424d-a3ce-1fcd755be863
+
+</footer>
+
+---
+
+# <u>Guarded transitions</u> are the if-else logic for statecharts
+
+<figure class="relative">
+  <div class="highlight w-47 h-11 left-105 top-41"></div>
+  <img src="/glass-statechart.png" class="w-180">
+</figure>
+---
+
+# <u>Extended state (context)</u> allows you to save additional data
+
+<figure class="relative">
+  <div class="highlight w-50 h-10 left-10 top-54 border-0"> amount = 0</div>
+  <div class="highlight w-90 h-10 left-70 top-54 border-0"> 1 &lt;= amount &lt;= 9 </div>
+  <div class="highlight w-50 h-10 left-150 top-54 border-0"> amount = 10</div>
+  <img src="/glass-statechart.png" class="w-180">
+</figure>
+---
+
+# <u>Actions</u> allow you to fire side-effects on entry, exit or transition.
+
+<figure class="relative">
+  <div class="highlight w-30 h-9 left-70 top-28"></div>
+  <div class="highlight w-30 h-9 left-34 top-43"></div>
+  <img src="/glass-statechart.png" class="w-180">
+</figure>
+
+---
+
+# XState is a frameword-agnostic JS/TS-library for creating executable statecharts
 <div class="float-right w-100">
 
 ```js
@@ -152,17 +183,16 @@ const promiseMachine = createMachine({
   }
 });
 ```
-
 </div>
 
-- A Framework-agnostic statechart library
-- Has bindings for React, Vue and Svelte
-- Developed by a startup called <a href="https://stately.ai/">Stately</a>
+- Visualizer: code -> diagram
+- Editor (beta): diagram -> code
+
+<img class="w-100" src="/promise-machine.png" />
 
 ---
 
-
-### XState (2/4) -  Context, actions and guards
+# XState example: Guards, context and the assign-action
 
 <div class="flex justify-between">
 
@@ -227,9 +257,53 @@ const glassMachine = createMachine({
 </div>
 </div>
 
+<style>
+
+#slide-content h1 {
+  margin: 0;
+}
+
+</style>
+
 ---
 
-# XState (3/4) - Invoking a promise
+# XState example: Delayed transitions
+```js
+const lightDelayMachine = createMachine({
+  id: 'lightDelay',
+  initial: 'green',
+  states: {
+    green: {
+      after: {
+        // after 1 second, transition to yellow
+        1000: { target: 'yellow' }
+      }
+    },
+    yellow: {
+      after: {
+        // after 0.5 seconds, transition to red
+        500: { target: 'red' }
+      }
+    },
+    red: {
+      after: {
+        // after 2 seconds, transition to green
+        2000: { target: 'green' }
+      }
+    }
+  }
+});
+```
+
+<style>
+#slide-content h1 {
+  margin: 0;
+}
+</style>
+
+---
+
+# XState example: Invoking a service (promise)
 
 <div class="flex justify-between">
 
@@ -292,7 +366,7 @@ const userMachine = createMachine({
 
 ---
 
-# XState (4/4) - Actors
+# XState example: Spawning actors (another machine)
 
 ```js
 
@@ -317,16 +391,26 @@ const todosMachine = createMachine({
     // ...
   }
 });
-
 ```
 
 ---
 
-# Workshop
+# Some XState features not introduced in this presentation
 
-- Implement UI logic for a wordle-clone (https://wordlegame.org/)
-- Repo here: https://github.com/KnowitJSTSGuild/ui-modeling-with-statecharts
-- Workshop template is in the __exercise__-directory
-- UI components and some other utilites are there, you just need to implement the logic with xstate
-- You can use the Stately editor, if you want (https://stately.ai/registry/new)
-- This is not an exam. If you get stuck, peek the __solution__-directory or ask for help in the chat
+- History states
+- Activities
+- Delayed events
+- Invoking callbacks & observables
+- Parallel states
+- ...
+
+---
+
+<h1 class="text-center">Workshop: Implement UI logic for Wordle using XState</h1>
+
+<div class="text-center mb-6">
+https://github.com/KnowitJSTSGuild/ui-modeling-with-statecharts
+</div>
+<div class="text-center">
+  <img src="/wordle.png" class="inline-block h-90" />
+</div>
