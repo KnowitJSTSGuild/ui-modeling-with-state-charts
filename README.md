@@ -26,10 +26,10 @@ If you have time left, you can also implement async initialization. In addition 
 
 ## Tips
 
-If you want, you can start modeling the UI visually using the [Stately beta editor](https://stately.ai/registry/new?source=landing-page) and then export it to use in your xstate machine.
+If you want, you can start modeling the UI visually using the [Stately editor (beta)](https://stately.ai/registry/new?source=landing-page) and then export it to use in your xstate machine.
 
 
-In order to get familiar with xstate, you can (browse the documentation)[https://xstate.js.org/docs/], or watch the [official beginner's guide in Youtube](https://www.youtube.com/playlist?list=PLvWgkXBB3dd4ocSi17y1JmMmz7S5cV8vI).
+In order to get familiar with xstate, you can [browse the documentation](https://xstate.js.org/docs/), or watch the [official beginner's guide in Youtube](https://www.youtube.com/playlist?list=PLvWgkXBB3dd4ocSi17y1JmMmz7S5cV8vI).
 
 ## Solution
 Example implementation for the workshop (using `pickRandomWordAsync`) is located in the solution-directory. You can take a peek, if you get stuck. 

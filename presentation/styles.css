@@ -12,12 +12,12 @@ html {
   
   #slide-content h1 {
     color: var(--knowit-forest);
-    font-size: 20px;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
   }
 
   li {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   .slidev-layout {

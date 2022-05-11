@@ -13,22 +13,22 @@ drawings:
   persist: false
 ---
 
+# UI Modeling with Statecharts
+How to make sense of complex UI logic?
+
 <style>
 
   #slide-content h1 {
-    font-size: 3rem;
     color: var(--knowit-sand);
+    font-size: 3rem;
   }
 
-  p {
+  #slide-content p {
     font-size: 1.8rem;
     opacity: 0.75;
   }
 
 </style>
-
-# UI Modeling with Statecharts
-How to make sense of complex UI logic?
 
 ---
 
@@ -124,7 +124,7 @@ const onDrop = async files => {
 
 <footer>
 
-https://stately.ai/viz/790f79f2-abcd-424d-a3ce-1fcd755be863
+<small>https://stately.ai/viz/790f79f2-abcd-424d-a3ce-1fcd755be863</small>
 
 </footer>
 
@@ -158,7 +158,7 @@ https://stately.ai/viz/790f79f2-abcd-424d-a3ce-1fcd755be863
 
 ---
 
-# XState is a frameword-agnostic JS/TS-library for creating executable statecharts
+# XState is a framework-agnostic JS/TS-library for creating executable statecharts
 <div class="float-right w-100">
 
 ```js
@@ -185,8 +185,10 @@ const promiseMachine = createMachine({
 ```
 </div>
 
-- Visualizer: code -> diagram
-- Editor (beta): diagram -> code
+- Developed by [Stately](https://stately.ai)
+- Visualizer: https://stately.ai/viz
+- Editor (beta): https://stately.ai/registry/new
+- [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode) allows both visualization and editing
 
 <img class="w-100" src="/promise-machine.png" />
 
@@ -303,7 +305,7 @@ const lightDelayMachine = createMachine({
 
 ---
 
-# XState example: Invoking a service (promise)
+# XState example: Invoking a promise and sending events
 
 <div class="flex justify-between">
 
@@ -330,6 +332,11 @@ const loading = {
   }
 }
 
+```
+
+```js
+const userService = interpret(userMachine).start()
+userService.send({type: 'FETCH'})
 ```
 </div>
 
@@ -366,50 +373,35 @@ const userMachine = createMachine({
 
 ---
 
-# XState example: Spawning actors (another machine)
-
-```js
-
-import { createMachine, spawn } from 'xstate';
-import { todoMachine } from './todoMachine';
-
-const todosMachine = createMachine({
-  // ...
-  on: {
-    'NEW_TODO.ADD': {
-      actions: assign({
-        todos: (context, event) => [
-          ...context.todos,
-          {
-            todo: event.todo,
-            // add a new todoMachine actor with a unique name
-            ref: spawn(todoMachine, `todo-${event.id}`)
-          }
-        ]
-      })
-    }
-    // ...
-  }
-});
-```
-
----
-
 # Some XState features not introduced in this presentation
 
+- Actors and spawning
 - History states
 - Activities
 - Delayed events
 - Invoking callbacks & observables
-- Parallel states
+- Nested & parallel states
 - ...
+
+Study further at https://xstate.js.org/docs
+
+---
+
+# Why statecharts & XState ?
+
+- Decoupling
+- Maintainability
+- Communication
+- Code = Documentation
 
 ---
 
 <h1 class="text-center">Workshop: Implement UI logic for Wordle using XState</h1>
 
 <div class="text-center mb-6">
+
 https://github.com/KnowitJSTSGuild/ui-modeling-with-statecharts
+
 </div>
 <div class="text-center">
   <img src="/wordle.png" class="inline-block h-90" />
