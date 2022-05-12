@@ -31,7 +31,7 @@ If you couldn't attend the workshop and would like to try by yourself, here are 
 - For motivation glance through this blogpost: https://dev.to/mpocock1/usestate-vs-usereducer-vs-xstate-part-1-modals-569e
 - Read [Introduction to state mahines and statecharts from XState documentation](https://xstate.js.org/docs/guides/introduction-to-state-machines-and-statecharts)
 - Watch at least videos 1,2,3,5,6,10 and 11 from Youtube playlist "[The Official Beginner's Guide to XState in React](https://www.youtube.com/playlist?list=PLvWgkXBB3dd4ocSi17y1JmMmz7S5cV8vI)"
-- Then implement the workshop with help of [XState documentation](https:/xstate.js.org/docs)
+- Then implement the workshop with help of [XState documentation](https://xstate.js.org/docs)
 
 ## Tips
 
